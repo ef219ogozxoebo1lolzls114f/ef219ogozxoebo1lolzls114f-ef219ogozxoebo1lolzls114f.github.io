@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v4z's bio</title>
+    <title>Terrorists</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,34 +11,38 @@
         <div class="loader"></div>
     </div>
     <div id="content" style="display: none;">
-        <img src="pfp.gif" class="profile-pic">
-        <h1>v4z</h1>
-        <p id="bio">Axon Owner | 14</p>
-        <div class="buttons">
-            <button class="play-music" id="play-button">Play Music</button>
-            <button class="discord" id="discord">Discord</button>
-            <button class="rifles" id="rifles">Rifles.lol Discord</button>
+        <div class="topbar">
+            <button class="topbar-button" id="home">Home</button>
+            <button class="topbar-button" id="login">Login</button>
+            <div id="welcome-label" class="welcome-label"></div>
         </div>
-        <audio id="song" loop autoplay>
-            <source src="music.mp3" type="audio/mpeg">
-        </audio>
     </div>
 
     <style>
         body, html {
-            background-image: url("background.gif");
+            background-image: url("background.png");
             background-size: cover;
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background-color: #121212;
             font-family: Arial, sans-serif;
             color: #ffffff;
+            position: relative;
+            overflow: hidden;
         }
+
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 0;
+            }
 
         #loader1 {
             position: absolute;
@@ -62,10 +66,6 @@
             animation: spin 2s linear infinite;
         }
 
-        #bio {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -77,38 +77,49 @@
         }
 
         #content {
-            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
             z-index: 1;
-        }
-
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        .buttons {
             display: flex;
-            flex-direction: column;
+            justify-content: flex-end;
             align-items: center;
+            padding: 20px;
         }
 
-        .play-music, .discord, .rifles {
+        .welcome-label {
+            margin-left: auto;
+            color: #ffffff;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            z-index: 10;
+        }
+
+        .topbar-button {
             background-color: #1e1e1e;
             color: #ffffff;
-            border: 0px solid;
+            border: 0;
             padding: 10px 20px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 10px;
-            width: 200px;
+            margin-right: 20px;
         }
 
-            .play-music:hover, .discord:hover, .rifles:hover {
+            .topbar-button:hover {
                 background-color: #3498db;
             }
     </style>
@@ -117,14 +128,16 @@
         window.addEventListener('load', function () {
             const loader1 = document.getElementById('loader1');
             const content = document.getElementById('content');
-            const play = document.getElementById('play-button');
-            const discord = document.getElementById('discord');
-            const rifles = document.getElementById('rifles');
-            const song = document.getElementById('song');
+            const home = document.getElementById('home');
+            const login = document.getElementById('login');
+            const welcomeLabel = document.getElementById('welcome-label');
+            const username = localStorage.getItem('username');
 
-            setTimeout(() => {
-                song.muted = false;
-            }, 1000);
+            if (username) { 
+                console.log(`Updating welcome label with username: ${username}`);
+                userLabel.textContent = `Welcome, ${username}`;
+            }
+
 
             setTimeout(() => {
                 loader1.style.opacity = '0';
@@ -132,24 +145,16 @@
 
                 setTimeout(() => {
                     loader1.style.display = 'none';
-                    content.style.display = 'block';
+                    content.style.display = 'flex';
                 }, 500);
             }, 2000);
 
-            play.addEventListener('click', () => {
-                song.volume = 0.3; 
-                song.muted = false; 
-                song.play(); 
-                play.textContent = "Playing song rn.";
-                play.disabled = true;
+            home.addEventListener('click', () => {
+                window.location.href = "#";
             });
 
-            discord.addEventListener('click', () => {
-                window.location.href = "https://discord.gg/QJaarrrBM7";
-            });
-
-            rifles.addEventListener('click', () => {
-                window.location.href = "https://discord.gg/rifles";
+            login.addEventListener('click', () => {
+                window.location.href = "login.html";
             });
         });
     </script>

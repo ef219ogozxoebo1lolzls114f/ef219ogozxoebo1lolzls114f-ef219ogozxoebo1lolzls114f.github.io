@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loader1">
+        <div class="loader"></div>
+    </div>
+    <div id="content" style="display: none;">
+        <div class="topbar">
+            <button class="topbar-button" id="home">Home</button>
+            <button class="topbar-button" id="login">Login</button>
+            <span id="user-label" style="margin-left: auto;"></span>
+        </div>
+        <div class="container">
+            <div class="form-container">
+                <div class="form" id="login-form">
+                    <h2>Login</h2>
+                    <input type="text" placeholder="Username" id="login-username">
+                    <input type="password" placeholder="Password" id="login-password">
+                    <button class="submit-button" id="login-submit">Login</button>
+                    <p class="toggle-form">Don't have an account? <span id="show-register">Register</span></p>
+                </div>
+                <div class="form" id="register-form" style="display: none;">
+                    <h2>Register</h2>
+                    <input type="text" placeholder="Username" id="register-username">
+                    <input type="password" placeholder="Password" id="register-password">
+                    <input type="password" placeholder="Confirm Password" id="register-confirm-password">
+                    <button class="submit-button" id="register-submit">Register</button>
+                    <p class="toggle-form">Already have an account? <span id="show-login">Login</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body, html {
+            background-image: url("background.png");
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+                z-index: 0;
+            }
+
+        #loader1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+            z-index: 10;
+        }
+
+        .loader {
+            border: 16px solid #1e1e1e;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            z-index: 10;
+        }
+
+        .topbar-button {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 20px;
+        }
+
+            .topbar-button:hover {
+                background-color: #3498db;
+            }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .form-container {
+            position: relative;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+            .form h2 {
+                margin-bottom: 10px;
+            }
+
+            .form input {
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgba(255, 255, 255, 0.2);
+                color: #fff;
+                font-size: 16px;
+            }
+
+                .form input::placeholder {
+                    color: #ccc;
+                }
+
+        .submit-button {
+            padding: 10px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+            .submit-button:hover {
+                background-color: #2980b9;
+            }
+
+        .toggle-form {
+            cursor: pointer;
+        }
+
+            .toggle-form span {
+                color: #3498db;
+            }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <script>
+        window.addEventListener('load', function () {
+            const loader1 = document.getElementById('loader1');
+            const content = document.getElementById('content');
+            const home = document.getElementById('home');
+            const login = document.getElementById('login');
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const showRegister = document.getElementById('show-register');
+            const showLogin = document.getElementById('show-login');
+            const loginSubmit = document.getElementById('login-submit');
+            const registerSubmit = document.getElementById('register-submit');
+            const userLabel = document.getElementById('user-label');
+
+            // Load users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+
+            setTimeout(() => {
+                loader1.style.opacity = '0';
+                loader1.style.transition = 'opacity 0.5s ease';
+
+                setTimeout(() => {
+                    loader1.style.display = 'none';
+                    content.style.display = 'flex';
+                }, 500);
+            }, 2000);
+
+            home.addEventListener('click', () => {
+                window.location.href = "index.html";
+            });
+
+            login.addEventListener('click', () => {
+                window.location.href = "#";
+            });
+
+            showRegister.addEventListener('click', () => {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'flex';
+            });
+
+            showLogin.addEventListener('click', () => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'flex';
+            });
+
+          
+
+            loginSubmit.addEventListener('click', () => {
+
+                const username = document.getElementById('login-username').value;
+
+                const password = document.getElementById('login-password').value;
+
+
+                if (users[username] && users[username] === password) {
+
+                    localStorage.setItem('username', username);
+
+                    window.location.href = "createbio.html";
+
+                } else {
+
+                    alert("Invalid username or password");
+
+                }
+
+            });
+
+            registerSubmit.addEventListener('click', () => {
+                const username = document.getElementById('register-username').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('register-confirm-password').value;
+
+                if (password === confirmPassword) {
+                    users[username] = password;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert("Registration successful");
+                    registerForm.style.display = 'none';
+                    loginForm.style.display = 'flex';
+
+                    // Fill in login form with registered details
+                    document.getElementById('login-username').value = username;
+                    document.getElementById('login-password').value = password;
+                } else {
+                    alert("Passwords do not match");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
