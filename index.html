@@ -3,160 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terrorists</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Sigma Skibidi</title>
 </head>
 <body>
-    <div id="loader1">
-        <div class="loader"></div>
-    </div>
-    <div id="content" style="display: none;">
-        <div class="topbar">
-            <button class="topbar-button" id="home">Home</button>
-            <button class="topbar-button" id="login">Login</button>
-            <div id="welcome-label" class="welcome-label"></div>
-        </div>
-    </div>
-
-    <style>
-        body, html {
-            background-image: url("background.png");
-            background-size: cover;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #121212;
-            font-family: Arial, sans-serif;
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
-        }
-
-            body::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7);
-                z-index: 0;
-            }
-
-        #loader1 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #121212;
-            z-index: 10;
-        }
-
-        .loader {
-            border: 16px solid #1e1e1e;
-            border-top: 16px solid #3498db;
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        #content {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .welcome-label {
-            margin-left: auto;
-            color: #ffffff;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        .topbar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            padding: 20px;
-            background-color: #1e1e1e;
-            z-index: 10;
-        }
-
-        .topbar-button {
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border: 0;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-right: 20px;
-        }
-
-            .topbar-button:hover {
-                background-color: #3498db;
-            }
-    </style>
-
-    <script>
-        window.addEventListener('load', function () {
-            const loader1 = document.getElementById('loader1');
-            const content = document.getElementById('content');
-            const home = document.getElementById('home');
-            const login = document.getElementById('login');
-            const welcomeLabel = document.getElementById('welcome-label');
-            const username = localStorage.getItem('username');
-
-            if (username) { 
-                console.log(`Updating welcome label with username: ${username}`);
-                userLabel.textContent = `Welcome, ${username}`;
-            }
-
-
-            setTimeout(() => {
-                loader1.style.opacity = '0';
-                loader1.style.transition = 'opacity 0.5s ease';
-
-                setTimeout(() => {
-                    loader1.style.display = 'none';
-                    content.style.display = 'flex';
-                }, 500);
-            }, 2000);
-
-            home.addEventListener('click', () => {
-                window.location.href = "#";
-            });
-
-            login.addEventListener('click', () => {
-                window.location.href = "login.html";
-            });
-        });
-    </script>
+    
 </body>
+
+<style>
+    body {
+        background-image: url("icegif-162.gif");
+        background-size: cover;
+        
+    }
+</style>
 </html>
